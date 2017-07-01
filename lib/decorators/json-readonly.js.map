@@ -1,0 +1,1 @@
+{"version":3,"file":"json-readonly.js","sourceRoot":"","sources":["json-readonly.ts"],"names":[],"mappings":";;AAAA,oEAA2D;AAE3D;IACI,MAAM,CAAC,UAAS,MAAU,EAAE,GAAU;QAClC,MAAM,QAAQ,GAAG,iCAAa,CAAC,MAAM,CAAC,WAAW,CAAC,CAAC,WAAW,CAAC,GAAG,CAAC,CAAC;QAEpE,QAAQ,CAAC,QAAQ,GAAG,IAAI,CAAC;IAC7B,CAAC,CAAC;AACN,CAAC;AAND,oCAMC"}
