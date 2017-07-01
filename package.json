@@ -1,0 +1,38 @@
+{
+  "name": "ta-json",
+  "version": "2.2.5",
+  "description": "Type-aware JSON serializer/parser",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "prepublish": "./node_modules/.bin/tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edcarroll/ta-json.git"
+  },
+  "author": "Edward Carroll",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edcarroll/ta-json/issues"
+  },
+  "keywords": [
+    "json",
+    "decorator",
+    "decorators",
+    "es6",
+    "es7",
+    "types",
+    "classes",
+    "serializer",
+    "parser"
+  ],
+  "homepage": "https://github.com/edcarroll/ta-json#readme",
+  "dependencies": {
+    "reflect-metadata": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  }
+}
