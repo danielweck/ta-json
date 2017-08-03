@@ -1,11 +1,17 @@
 {
   "name": "ta-json",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "description": "Type-aware JSON serializer/parser",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "typings": "./index.d.ts",
   "scripts": {
-    "prepublish": "./node_modules/.bin/tsc"
+    "lint": "tslint -c tslint.json --type-check --project ./tsconfig.json",
+    "compile": "tsc && tsc -p tsconfig.cjs.json",
+    "compile:w": "tsc -w",
+    "prepublishOnly": "npm run build",
+    "build": "npm run lint && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -32,7 +38,9 @@
     "reflect-metadata": "latest"
   },
   "devDependencies": {
+    "@edcarroll/code-style": "latest",
     "@types/node": "latest",
+    "tslint": "latest",
     "typescript": "latest"
   }
 }
