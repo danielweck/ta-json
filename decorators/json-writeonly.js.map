@@ -1,0 +1,1 @@
+{"version":3,"file":"json-writeonly.js","sourceRoot":"","sources":["../../../src/decorators/json-writeonly.ts"],"names":[],"mappings":";;AAAA,oEAA6D;AAE7D,wDAAwD;AAExD;IACI,MAAM,CAAC,UAAS,MAAU,EAAE,GAAU;QAClC,MAAM,QAAQ,GAAG,iCAAa,CAAC,MAAM,CAAC,WAAW,CAAC,CAAC,WAAW,CAAC,GAAG,CAAC,CAAC;QAEpE,QAAQ,CAAC,SAAS,GAAG,IAAI,CAAC;IAC9B,CAAC,CAAC;AACN,CAAC;AAND,sCAMC"}

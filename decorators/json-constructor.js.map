@@ -1,0 +1,1 @@
+{"version":3,"file":"json-constructor.js","sourceRoot":"","sources":["../../../src/decorators/json-constructor.ts"],"names":[],"mappings":";;AAAA,oEAA6D;AAE7D,wDAAwD;AAExD;IACI,MAAM,CAAC,UAAS,MAAU,EAAE,GAAU;QAClC,MAAM,UAAU,GAAG,iCAAa,CAAC,MAAM,CAAC,WAAW,CAAC,CAAC;QAErD,UAAU,CAAC,GAAG,GAAG,MAAM,CAAC,GAAG,CAAC,CAAC;IACjC,CAAC,CAAC;AACN,CAAC;AAND,0CAMC"}
