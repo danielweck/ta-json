@@ -9,4 +9,3 @@ function JsonWriteonly() {
     };
 }
 exports.JsonWriteonly = JsonWriteonly;
-//# sourceMappingURL=json-writeonly.js.map

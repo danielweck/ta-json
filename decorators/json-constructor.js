@@ -9,4 +9,3 @@ function JsonConstructor() {
     };
 }
 exports.JsonConstructor = JsonConstructor;
-//# sourceMappingURL=json-constructor.js.map

@@ -12,4 +12,3 @@ class DateConverter {
     }
 }
 exports.DateConverter = DateConverter;
-//# sourceMappingURL=date-converter.js.map

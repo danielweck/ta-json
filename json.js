@@ -17,4 +17,3 @@ class JSON {
     }
 }
 exports.JSON = JSON;
-//# sourceMappingURL=json.js.map

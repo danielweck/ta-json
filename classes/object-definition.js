@@ -74,4 +74,3 @@ function getTypedInheritanceChain(type, object) {
     return Array.from(inheritanceChain).filter(t => exports.objectDefinitions.has(t));
 }
 exports.getTypedInheritanceChain = getTypedInheritanceChain;
-//# sourceMappingURL=object-definition.js.map

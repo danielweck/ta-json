@@ -8,4 +8,3 @@ function JsonObject() {
     };
 }
 exports.JsonObject = JsonObject;
-//# sourceMappingURL=json-object.js.map

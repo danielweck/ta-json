@@ -67,4 +67,3 @@ function deserializeObject(object, definition, options) {
     }
     return value;
 }
-//# sourceMappingURL=deserialize.js.map

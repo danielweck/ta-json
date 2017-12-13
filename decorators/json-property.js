@@ -16,4 +16,3 @@ function JsonProperty(propertyName) {
     };
 }
 exports.JsonProperty = JsonProperty;
-//# sourceMappingURL=json-property.js.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"json-readonly.js","sourceRoot":"","sources":["../../../src/decorators/json-readonly.ts"],"names":[],"mappings":";;AAAA,oEAA6D;AAE7D,wDAAwD;AAExD;IACI,MAAM,CAAC,UAAS,MAAU,EAAE,GAAU;QAClC,MAAM,QAAQ,GAAG,iCAAa,CAAC,MAAM,CAAC,WAAW,CAAC,CAAC,WAAW,CAAC,GAAG,CAAC,CAAC;QAEpE,QAAQ,CAAC,QAAQ,GAAG,IAAI,CAAC;IAC7B,CAAC,CAAC;AACN,CAAC;AAND,oCAMC"}

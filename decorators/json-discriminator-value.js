@@ -8,4 +8,3 @@ function JsonDiscriminatorValue(value) {
     };
 }
 exports.JsonDiscriminatorValue = JsonDiscriminatorValue;
-//# sourceMappingURL=json-discriminator-value.js.map

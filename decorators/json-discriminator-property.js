@@ -8,4 +8,3 @@ function JsonDiscriminatorProperty(property) {
     };
 }
 exports.JsonDiscriminatorProperty = JsonDiscriminatorProperty;
-//# sourceMappingURL=json-discriminator-property.js.map

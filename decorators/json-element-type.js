@@ -9,4 +9,3 @@ function JsonElementType(type) {
     };
 }
 exports.JsonElementType = JsonElementType;
-//# sourceMappingURL=json-element-type.js.map

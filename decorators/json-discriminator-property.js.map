@@ -1,1 +1,0 @@
-{"version":3,"file":"json-discriminator-property.js","sourceRoot":"","sources":["../../../src/decorators/json-discriminator-property.ts"],"names":[],"mappings":";;AAAA,oEAA6D;AAE7D,wDAAwD;AAExD,mCAA0C,QAAe;IACrD,MAAM,CAAC,UAAS,WAAoB;QAChC,iCAAa,CAAC,WAAW,CAAC,CAAC,qBAAqB,GAAG,QAAQ,CAAC;IAChE,CAAC,CAAC;AACN,CAAC;AAJD,8DAIC"}

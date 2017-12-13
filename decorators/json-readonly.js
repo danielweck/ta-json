@@ -9,4 +9,3 @@ function JsonReadonly() {
     };
 }
 exports.JsonReadonly = JsonReadonly;
-//# sourceMappingURL=json-readonly.js.map

@@ -21,4 +21,3 @@ class BufferConverter {
     }
 }
 exports.BufferConverter = BufferConverter;
-//# sourceMappingURL=buffer-converter.js.map

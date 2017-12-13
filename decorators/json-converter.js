@@ -14,4 +14,3 @@ function JsonConverter(converter) {
     };
 }
 exports.JsonConverter = JsonConverter;
-//# sourceMappingURL=json-converter.js.map

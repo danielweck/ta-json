@@ -9,4 +9,3 @@ class PropertyDefinition {
     }
 }
 exports.PropertyDefinition = PropertyDefinition;
-//# sourceMappingURL=property-definition.js.map

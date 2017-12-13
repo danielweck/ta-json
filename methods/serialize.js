@@ -68,4 +68,3 @@ function serializeObject(object, definition) {
     }
     return value;
 }
-//# sourceMappingURL=serialize.js.map
