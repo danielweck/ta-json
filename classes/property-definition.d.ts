@@ -7,5 +7,4 @@ export declare class PropertyDefinition {
     writeonly: boolean;
     converter: IPropertyConverter;
     serializedName: string;
-    constructor();
 }

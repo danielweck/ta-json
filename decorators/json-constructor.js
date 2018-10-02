@@ -5,7 +5,7 @@ const object_definition_1 = require("../classes/object-definition");
 function JsonConstructor() {
     return function (target, key) {
         const definition = object_definition_1.getDefinition(target.constructor);
-        definition.ctr = target[key];
+        definition.ctr = target[key.toString()];
     };
 }
 exports.JsonConstructor = JsonConstructor;

@@ -4,7 +4,7 @@ export declare class ObjectDefinition {
     ctr: () => void;
     beforeDeserialized: () => void;
     onDeserialized: () => void;
-    discriminatorProperty: string;
+    discriminatorProperty?: string;
     discriminatorValue: any;
     properties: Map<string, PropertyDefinition>;
     constructor();

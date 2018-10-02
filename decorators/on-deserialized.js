@@ -5,7 +5,7 @@ const object_definition_1 = require("../classes/object-definition");
 function OnDeserialized() {
     return function (target, key) {
         const definition = object_definition_1.getDefinition(target.constructor);
-        definition.onDeserialized = target[key];
+        definition.onDeserialized = target[key.toString()];
     };
 }
 exports.OnDeserialized = OnDeserialized;
