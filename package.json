@@ -1,6 +1,6 @@
 {
   "name": "ta-json",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "description": "Type-aware JSON serializer/parser",
   "main": "dist/cjs/index.js",
   "types": "dist/es6/index.d.ts",
@@ -34,12 +34,12 @@
   ],
   "homepage": "https://github.com/edcarroll/ta-json#readme",
   "dependencies": {
-    "reflect-metadata": "latest"
+    "reflect-metadata": "^0.1.12"
   },
   "devDependencies": {
-    "@edcarroll/code-style": "latest",
-    "@types/node": "latest",
-    "tslint": "latest",
-    "typescript": "latest"
+    "@edcarroll/code-style": "^2.0.0",
+    "@types/node": "^8.10.24",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
   }
 }
