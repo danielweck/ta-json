@@ -1,5 +1,10 @@
 # Type-Aware JSON Parser & Serializer (ta-json)
 
+FORKED FROM https://github.com/edcarroll/ta-json.git
+SEE DIFF https://github.com/edcarroll/ta-json/compare/master...danielweck:master
+PUBLISHED as "ta-json-x" NPM package
+(because of NPM bugs, see https://github.com/readium/r2-testapp-js/issues/10 )
+
 <a href="https://www.npmjs.com/package/ta-json">
   <img alt="npm" src="https://img.shields.io/npm/v/ta-json.svg?style=flat-square" />
 </a>
