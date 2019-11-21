@@ -19,6 +19,10 @@ export interface IDynamicObject {
     [name:string]:any;
 }
 
-export interface IParseOptions {
+export interface IGenerateOptions {
+    keyToPreserveUnknownJSON?:string;
+}
+
+export interface IParseOptions extends IGenerateOptions {
     runConstructor?:boolean;
 }

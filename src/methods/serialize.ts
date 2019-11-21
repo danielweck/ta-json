@@ -1,17 +1,25 @@
 import { propertyConverters } from "./../converters/converter";
 import { PropertyDefinition } from "../classes/property-definition";
-import { JsonValue, IDynamicObject } from "../types";
+import { JsonValue, IDynamicObject, IGenerateOptions } from "../types";
 import { objectDefinitions, getInheritanceChain, getTypedInheritanceChain, ObjectDefinition } from "../classes/object-definition";
 
-export function serialize(value:IDynamicObject | IDynamicObject[], type?:Function):JsonValue {
+export function serialize(
+    value:IDynamicObject | IDynamicObject[],
+    type?:Function,
+    options:IGenerateOptions = { keyToPreserveUnknownJSON: undefined }):JsonValue {
+
     if (value.constructor === Array) {
-        return (value as IDynamicObject[]).map(o => serializeRootObject(o, type));
+        return (value as IDynamicObject[]).map(o => serializeRootObject(o, type, options));
     }
 
-    return serializeRootObject(value as IDynamicObject, type);
+    return serializeRootObject(value as IDynamicObject, type, options);
 }
 
-function serializeRootObject(object:IDynamicObject, type:Function = Object.getPrototypeOf(object).constructor):JsonValue {
+function serializeRootObject(
+    object:IDynamicObject,
+    type:Function = Object.getPrototypeOf(object).constructor,
+    options:IGenerateOptions):JsonValue {
+
     const inheritanceChain = getTypedInheritanceChain(type);
 
     if (inheritanceChain.length === 0) {
@@ -50,6 +58,32 @@ function serializeRootObject(object:IDynamicObject, type:Function = Object.getPr
         });
     });
 
+    if (options.keyToPreserveUnknownJSON) {
+        const anchor = options.keyToPreserveUnknownJSON;
+        if (object[anchor]) {
+            const jsonProps = Object.keys(object[anchor]);
+            for (const jsonProp of jsonProps) {
+                if (object[anchor].hasOwnProperty(jsonProp)) {
+                    let property:PropertyDefinition | undefined;
+                    definitions.forEach(d => {
+                        d.properties.forEach((p, key) => {
+                            if (!property && jsonProp === p.serializedName) {
+                                property = p;
+                                // break
+                            }
+                        });
+                    });
+                    if (!property) {
+                        if (typeof output[jsonProp] !== "undefined") {
+                            console.log(`???!!! TAJSON keyToPreserveUnknownJSON already serialized?! ${anchor}.${jsonProp}`);
+                        }
+                        // warning: reference copy, not deep clone!
+                        output[jsonProp] = object[anchor][jsonProp];
+                    }
+                }
+            }
+        }
+    }
     return output;
 }
 

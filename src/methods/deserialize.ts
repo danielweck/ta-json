@@ -3,7 +3,11 @@ import { objectDefinitions, getTypedInheritanceChain, ObjectDefinition } from ".
 import { PropertyDefinition } from "../classes/property-definition";
 import { propertyConverters } from "../converters/converter";
 
-export function deserialize(object:JsonValue, type?:Function, options:IParseOptions = { runConstructor: false }):any {
+export function deserialize(
+    object:JsonValue,
+    type?:Function,
+    options:IParseOptions = { runConstructor: false, keyToPreserveUnknownJSON: undefined }):any {
+
     if (object && object.constructor === Array) {
         return (object as JsonValueArray).map(o => deserializeRootObject(o, type, options));
     }
@@ -52,6 +56,31 @@ function deserializeRootObject(object:JsonValue, objectType:Function = Object, o
 
             output[key] = deserializeObject(value, p, options);
         });
+
+        if (options.keyToPreserveUnknownJSON) {
+            const anchor = options.keyToPreserveUnknownJSON;
+            Object.keys(values).forEach(jsonProp => {
+                if (values.hasOwnProperty(jsonProp)) {
+                    let property:PropertyDefinition | undefined;
+                    d.properties.forEach((p, key) => {
+                        if (!property && jsonProp === p.serializedName) {
+                            property = p;
+                            // break
+                        }
+                    });
+                    if (!property) {
+                        if (!output[anchor]) {
+                            output[anchor] = {};
+                        }
+                        if (typeof output[anchor][jsonProp] !== "undefined") {
+                            console.log(`???!!! TAJSON keyToPreserveUnknownJSON already deserialized?! ${anchor}.${jsonProp}`);
+                        }
+                        // warning: reference copy, not deep clone!
+                        output[anchor][jsonProp] = values[jsonProp];
+                    }
+                }
+            });
+        }
 
         d.onDeserialized.call(output);
     });
