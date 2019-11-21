@@ -3,15 +3,15 @@ import { JsonValueArray, JsonValue, JsonValueObject } from "../types";
 
 export interface IJsonBuffer extends JsonValueObject {
     type:"Buffer";
-    data:JsonValueArray;
+    data:number[];
 }
 
 export type IBuffer = IJsonBuffer | string;
 
 export class BufferConverter implements IPropertyConverter {
-    private _encoding:string;
+    private _encoding:BufferEncoding|"json";
 
-    constructor(encoding:string = "json") {
+    constructor(encoding:BufferEncoding|"json" = "json") {
         this._encoding = encoding;
     }
 
