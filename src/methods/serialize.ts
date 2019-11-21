@@ -45,16 +45,16 @@ function serializeRootObject(
             }
 
             if (p.set) {
-                output[p.serializedName] = serializeArray(Array.from(value || []), p);
+                output[p.serializedName] = serializeArray(Array.from(value || []), p, options);
                 return;
             }
 
             if (p.array) {
-                output[p.serializedName] = serializeArray(value, p);
+                output[p.serializedName] = serializeArray(value, p, options);
                 return;
             }
 
-            output[p.serializedName] = serializeObject(value, p);
+            output[p.serializedName] = serializeObject(value, p, options);
         });
     });
 
@@ -87,8 +87,8 @@ function serializeRootObject(
     return output;
 }
 
-function serializeArray(array:IDynamicObject[], definition:PropertyDefinition):JsonValue {
-    const arr = array.map(v => serializeObject(v, definition));
+function serializeArray(array:IDynamicObject[], definition:PropertyDefinition, options:IGenerateOptions):JsonValue {
+    const arr = array.map(v => serializeObject(v, definition, options));
     if (arr.length === 1) {
         const converter = definition.converter || propertyConverters.get(definition.type);
         if (converter && converter.collapseArrayWithSingleItem()) {
@@ -98,7 +98,7 @@ function serializeArray(array:IDynamicObject[], definition:PropertyDefinition):J
     return arr;
 }
 
-function serializeObject(object:IDynamicObject, definition:PropertyDefinition):JsonValue {
+function serializeObject(object:IDynamicObject, definition:PropertyDefinition, options:IGenerateOptions):JsonValue {
     const primitive = definition.type === String || definition.type === Boolean || definition.type === Number;
     const value:any = object;
 
@@ -112,9 +112,9 @@ function serializeObject(object:IDynamicObject, definition:PropertyDefinition):J
 
         if (objDefinition) {
             if (value instanceof definition.type) {
-                return serialize(value);
+                return serialize(value, undefined, options);
             }
-            return serialize(value, definition.type);
+            return serialize(value, definition.type, options);
         }
     }
 

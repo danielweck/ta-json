@@ -112,7 +112,7 @@ function deserializeObject(object:JsonValue, definition:PropertyDefinition, opti
         const objDefinition = objectDefinitions.get(definition.type);
 
         if (objDefinition) {
-            return deserialize(value, definition.type);
+            return deserialize(value, definition.type, options);
         }
     }
 
