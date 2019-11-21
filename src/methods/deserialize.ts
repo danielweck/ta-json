@@ -1,3 +1,5 @@
+import * as util from "util";
+
 import { JsonValue, IDynamicObject, JsonValueObject, JsonValueArray, IParseOptions } from "../types";
 import { objectDefinitions, getTypedInheritanceChain, ObjectDefinition } from "../classes/object-definition";
 import { PropertyDefinition } from "../classes/property-definition";
@@ -57,11 +59,15 @@ function deserializeRootObject(object:JsonValue, objectType:Function = Object, o
             output[key] = deserializeObject(value, p, options);
         });
 
-        if (options.keyToPreserveUnknownJSON) {
-            const anchor = options.keyToPreserveUnknownJSON;
-            Object.keys(values).forEach(jsonProp => {
-                if (values.hasOwnProperty(jsonProp)) {
-                    let property:PropertyDefinition | undefined;
+        d.onDeserialized.call(output);
+    });
+
+    if (options.keyToPreserveUnknownJSON) {
+        const anchor = options.keyToPreserveUnknownJSON;
+        Object.keys(values).forEach(jsonProp => {
+            if (values.hasOwnProperty(jsonProp)) {
+                let property:PropertyDefinition | undefined;
+                definitions.forEach(d => {
                     d.properties.forEach((p, key) => {
                         if (!property && jsonProp === p.serializedName) {
                             property = p;
@@ -73,17 +79,25 @@ function deserializeRootObject(object:JsonValue, objectType:Function = Object, o
                             output[anchor] = {};
                         }
                         if (typeof output[anchor][jsonProp] !== "undefined") {
-                            console.log(`???!!! TAJSON keyToPreserveUnknownJSON already deserialized?! ${anchor}.${jsonProp}`);
+                            // console.log(`???!!! TAJSON keyToPreserveUnknownJSON already deserialized?! ${anchor}.${jsonProp}`);
+                            // // breakLength: 100  maxArrayLength: undefined
+                            // tslint:disable-next-line: max-line-length
+                            // console.log(util.inspect(output[anchor][jsonProp], { showHidden: false, depth: 1000, colors: true, customInspect: false }));
+
+                            if (output[anchor][jsonProp] !== values[jsonProp]) {
+                                console.log(`???!!! TAJSON keyToPreserveUnknownJSON already deserialized DIFF?! ${anchor}.${jsonProp}`);
+                                // breakLength: 100  maxArrayLength: undefined
+                                // tslint:disable-next-line: max-line-length
+                                console.log(util.inspect(values[jsonProp], { showHidden: false, depth: 1000, colors: true, customInspect: false }));
+                            }
                         }
                         // warning: reference copy, not deep clone!
                         output[anchor][jsonProp] = values[jsonProp];
                     }
-                }
-            });
-        }
-
-        d.onDeserialized.call(output);
-    });
+                });
+            }
+        });
+    }
 
     return output;
 }

@@ -1,3 +1,5 @@
+import * as util from "util";
+
 import { propertyConverters } from "./../converters/converter";
 import { PropertyDefinition } from "../classes/property-definition";
 import { JsonValue, IDynamicObject, IGenerateOptions } from "../types";
@@ -76,6 +78,16 @@ function serializeRootObject(
                     if (!property) {
                         if (typeof output[jsonProp] !== "undefined") {
                             console.log(`???!!! TAJSON keyToPreserveUnknownJSON already serialized?! ${anchor}.${jsonProp}`);
+                            // breakLength: 100  maxArrayLength: undefined
+                            // tslint:disable-next-line: max-line-length
+                            console.log(util.inspect(output[jsonProp], { showHidden: false, depth: 1000, colors: true, customInspect: false }));
+
+                            if (output[jsonProp] !== object[anchor][jsonProp]) {
+                                console.log(`???!!! TAJSON keyToPreserveUnknownJSON already serialized DIFF?! ${anchor}.${jsonProp}`);
+                                // breakLength: 100  maxArrayLength: undefined
+                                // tslint:disable-next-line: max-line-length
+                                console.log(util.inspect(object[anchor][jsonProp], { showHidden: false, depth: 1000, colors: true, customInspect: false }));
+                            }
                         }
                         // warning: reference copy, not deep clone!
                         output[jsonProp] = object[anchor][jsonProp];
