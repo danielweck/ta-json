@@ -56,6 +56,11 @@ function deserializeRootObject(object:JsonValue, objectType:Function = Object, o
                 return;
             }
 
+            if (p.map) {
+                output[key] = deserializeMap(value, p, options);
+                return;
+            }
+
             output[key] = deserializeObject(value, p, options);
         });
 
@@ -111,6 +116,15 @@ function deserializeArray(array:JsonValue, definition:PropertyDefinition, option
             [array] :
             array);
     return (arr as JsonValueArray).map(v => deserializeObject(v, definition, options));
+}
+
+function deserializeMap(object:JsonValue, definition:PropertyDefinition, options:IParseOptions):IDynamicObject {
+    const map = new Map();
+
+    Object.entries(object as Record<string, JsonValue>)
+        .forEach(([k, v]) => map.set(k, deserializeObject(v, definition, options)));
+
+    return map;
 }
 
 function deserializeObject(object:JsonValue, definition:PropertyDefinition, options:IParseOptions):IDynamicObject {

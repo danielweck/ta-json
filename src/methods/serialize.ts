@@ -46,6 +46,11 @@ function serializeRootObject(
                 return;
             }
 
+            if (p.map) {
+                output[p.serializedName] = serializeMap(value, p, options);
+                return;
+            }
+
             if (p.set) {
                 output[p.serializedName] = serializeArray(Array.from(value || []), p, options);
                 return;
@@ -108,6 +113,16 @@ function serializeArray(array:IDynamicObject[], definition:PropertyDefinition, o
         }
     }
     return arr;
+}
+
+function serializeMap(map:Map<string, IDynamicObject>, definition:PropertyDefinition, options:IGenerateOptions):JsonValue {
+    const object:Record<string, JsonValue> = {};
+
+    map.forEach((v, k) =>
+        object[k] = serializeObject(v, definition, options)
+    );
+
+    return object;
 }
 
 function serializeObject(object:IDynamicObject, definition:PropertyDefinition, options:IGenerateOptions):JsonValue {
