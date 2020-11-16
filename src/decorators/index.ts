@@ -9,4 +9,5 @@ export * from "./json-discriminator-property";
 export * from "./json-discriminator-value";
 export * from "./json-constructor";
 export * from "./before-deserialized";
+export * from "./known-json-property";
 export * from "./on-deserialized";
