@@ -6,6 +6,7 @@ export class ObjectDefinition {
     public beforeDeserialized:() => void;
     public onDeserialized:() => void;
     public discriminatorProperty?:string;
+    public knownProperty?:string;
     public discriminatorValue:any;
     public properties:Map<string, PropertyDefinition>;
 
@@ -58,36 +59,44 @@ function getChildClassDefinitions(parentType:Function):[Function, ObjectDefiniti
     return childDefs;
 }
 
-export function getTypedInheritanceChain(type:Function, object?:JsonValueObject):Function[] {
+function getActualType(type:Function, object?:JsonValueObject):Function {
     const parentDef = objectDefinitions.get(type);
 
     let childDefs:[Function, ObjectDefinition][] = [];
 
-    if (object && parentDef && parentDef.discriminatorProperty) {
+    if (object && parentDef) {
         childDefs = childDefs.concat(getChildClassDefinitions(type));
     }
 
-    let actualType:Function | undefined;
-
-    while (childDefs.length !== 0 && !actualType) {
+    while (childDefs.length !== 0) {
         const [t, def] = childDefs.shift()!; // We are checking the length in the loop so an assertion here is fine.
 
-        if (def.hasOwnProperty("discriminatorValue")) {
-            if (object && parentDef && def.discriminatorValue === object[parentDef.discriminatorProperty!]) {
-                if (def.hasOwnProperty("discriminatorProperty")) {
-                    return getTypedInheritanceChain(t, object);
-                }
-                actualType = t;
-            }
-        } else {
+        const hasKnownProperty = def.hasOwnProperty("knownProperty");
+        const hasDiscriminatorValue = def.hasOwnProperty("discriminatorValue");
+
+        if (!hasKnownProperty && !hasDiscriminatorValue) {
             childDefs = childDefs.concat(getChildClassDefinitions(t));
+            continue;
         }
+
+        if (!object) {
+            continue;
+        }
+
+        if (!(hasKnownProperty && object[def.knownProperty!] !== undefined) &&
+            !(hasDiscriminatorValue && parentDef && parentDef.discriminatorProperty &&
+                def.discriminatorValue! === object[parentDef.discriminatorProperty])) {
+            continue;
+        }
+
+        return getActualType(t, object);
     }
 
-    if (!actualType) {
-        actualType = type;
-    }
+    return type;
+}
 
+export function getTypedInheritanceChain(type:Function, object?:JsonValueObject):Function[] {
+    const actualType = getActualType(type, object);
     const inheritanceChain = new Set<Function>(getInheritanceChain(Object.create(actualType.prototype)));
     return Array.from(inheritanceChain).filter(t => objectDefinitions.has(t));
 }

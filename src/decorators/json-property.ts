@@ -11,6 +11,7 @@ export function JsonProperty(propertyName?:string):PropertyDecorator {
         property.serializedName = propertyName || key.toString();
         property.array = type === Array;
         property.set = type === Set;
+        property.map = type === Map;
         if (!property.array && !property.set && !property.type) {
             property.type = type;
         }
