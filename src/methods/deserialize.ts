@@ -93,10 +93,18 @@ function deserializeRootObject(object:JsonValue, objectType:Function = Object, o
                         }
                         // warning: reference copy, not deep clone!
                         output[anchor][jsonProp] = values[jsonProp];
+                    } else if (output[anchor] && typeof output[anchor][jsonProp] !== "undefined") {
+                        // note: jsonProp === property.serializedName
+
+                        // output[anchor][jsonProp] = undefined;
+                        delete output[anchor][jsonProp];
                     }
                 });
             }
         });
+        if (output[anchor] && !Object.keys(output[anchor]).length) {
+            delete output[anchor];
+        }
     }
 
     return output;
